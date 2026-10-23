@@ -11,6 +11,7 @@ erDiagram
 
     USER {
         int id
+        string username
         string name
         string email
         string password
@@ -52,3 +53,11 @@ erDiagram
         datetime uploaded_at
     }
 ```
+
+Toelichting:
+
+- `users.username` en `users.email` zijn uniek; `email` is nullable, omdat registratie alleen een gebruikersnaam en wachtwoord vraagt.
+- `users.is_subscriber` is een boolean met standaardwaarde `false`.
+- `weblogs.published_at` is geïndexeerd; `weblogs.is_premium` is een boolean met standaardwaarde `false`.
+- `category_weblog` heeft een samengestelde primaire sleutel (`weblog_id`, `category_id`).
+- Alle foreign keys hebben cascade-delete, zodat comments, afbeeldingen en categorie-koppelingen met het artikel verdwijnen.
